@@ -54,10 +54,7 @@ export default function Landing({ session }) {
               Open My Dashboard
             </button>
           ) : (
-            <>
-              <Link to="/signup"><button className="btn btn-primary" style={{ fontSize: '1.05rem', padding: '0.7rem 1.75rem' }}>Get Started — It's Free</button></Link>
-              <Link to="/login"><button className="btn btn-secondary" style={{ fontSize: '1.05rem', padding: '0.7rem 1.75rem' }}>Log In</button></Link>
-            </>
+            <Link to="/signup"><button className="btn btn-primary" style={{ fontSize: '1.05rem', padding: '0.7rem 1.75rem' }}>Get Started — It's Free</button></Link>
           )}
         </div>
       </section>
