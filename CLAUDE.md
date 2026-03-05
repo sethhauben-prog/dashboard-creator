@@ -3,7 +3,7 @@
 ## Project Overview
 Dashboard Creator is a multi-user web app built with Vite + React and Supabase.
 Users can sign up or log in (email/password or Google SSO), build a personal dashboard
-by choosing from 12 widgets on the Set Up page, then launch a full-screen live view.
+by choosing from 13 widgets on the Set Up page, then launch a full-screen live view.
 
 ## Tech Stack
 - **Frontend:** Vite + React (JSX), React Router v6, plain CSS
@@ -36,10 +36,11 @@ const supabaseUrl = "https://abc123.supabase.co";
 `.env` is in `.gitignore` — never commit it.
 
 ## Environment Variables
-| Variable | Description |
-|---|---|
-| `VITE_SUPABASE_URL` | Your Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | Your Supabase public anon key |
+| Variable | Where | Description |
+|---|---|---|
+| `VITE_SUPABASE_URL` | `.env` + Vercel | Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | `.env` + Vercel | Supabase public anon key |
+| `ANTHROPIC_API_KEY` | `.env` + Vercel | Claude API key (server-side only, never `VITE_` prefixed) |
 
 ## Routes
 | Path | Page | Access |
@@ -58,9 +59,10 @@ const supabaseUrl = "https://abc123.supabase.co";
 - `src/pages/Login.jsx` — Email/password + Google SSO log in
 - `src/pages/Dashboard.jsx` — Set Up page: add/remove widgets, Launch Dashboard button
 - `src/pages/DashboardView.jsx` — Full-screen live My Dashboard view
-- `src/components/WidgetPicker.jsx` — Modal with 12 widget options
+- `src/components/WidgetPicker.jsx` — Modal with 13 widget options
 - `src/components/WidgetGrid.jsx` — Renders widget cards; supports `viewOnly` prop
-- `src/components/widgets/` — 12 widget components
+- `src/components/widgets/` — 13 widget components
+- `api/claude.js` — Vercel serverless function; proxies requests to Claude API (keeps API key server-side)
 - `src/index.css` — All styles (plain CSS, no framework)
 - `vercel.json` — SPA rewrite rule for Vercel deployment
 
@@ -84,9 +86,10 @@ Full-screen live view of the user's dashboard.
 ```
 Stored as a JSONB array in `dashboards.widgets`. One row per user.
 
-## All 12 Widgets
+## All 13 Widgets
 | Type | Component | Notes |
 |---|---|---|
+| `claude` | ClaudeWidget | Chat with Claude AI via `/api/claude` serverless function |
 | `clock` | ClockWidget | Live time/date, ticks every second |
 | `todo` | TodoWidget | Add/check/remove tasks |
 | `quote` | QuoteWidget | Local quote array, daily pick + refresh |
@@ -104,8 +107,20 @@ Stored as a JSONB array in `dashboards.widgets`. One row per user.
 - Email/password via Supabase Auth
 - Google SSO via `supabase.auth.signInWithOAuth({ provider: 'google' })`
   - Redirects to `window.location.origin + '/dashboard'` after login
-  - Requires Google provider enabled in Supabase dashboard + Google Cloud Console credentials
-- Session managed in `App.jsx` via `onAuthStateChange`
+  - Session managed in `App.jsx` via `onAuthStateChange`
+
+### Google OAuth Setup (already configured)
+- **Supabase:** Google provider enabled with Client ID + Secret
+- **Google Cloud Console:** Authorized redirect URI set to `https://llmywaqwpngworrfmaqo.supabase.co/auth/v1/callback`
+- **OAuth consent screen:** App name = "Dashboard Creator", publishing status = Production
+- If consent screen shows Supabase URL instead of app name → app is in Testing mode; fix via Audience → Publish App
+
+### Ask Claude Widget — Serverless Function
+- `api/claude.js` runs on Vercel's Node.js runtime
+- Uses `ANTHROPIC_API_KEY` from server env (never exposed to browser — do NOT use `VITE_` prefix)
+- Model: `claude-haiku-4-5-20251001`, max 1024 tokens, 20-message history cap
+- To test locally: use `vercel dev` instead of `npm run dev`
+- Must add `ANTHROPIC_API_KEY` in Vercel dashboard → Project Settings → Environment Variables
 
 ## DB Schema (Supabase)
 ```sql
