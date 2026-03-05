@@ -665,6 +665,206 @@ body {
 }
 .countdown-form input:focus { outline: none; border-color: #4f46e5; }
 
+/* ---- Admin Panel ---- */
+.admin-page {
+  min-height: 100vh;
+  background: #f0f4f8;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #718096;
+}
+.admin-loading--error { color: #e53e3e; }
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.admin-brand {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.admin-content {
+  padding: 1.5rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Toast feedback */
+.admin-toast {
+  background: #2d3748;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.88rem;
+}
+
+/* Overview stat cards */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.admin-stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.admin-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4f46e5;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+.admin-stat-label {
+  font-size: 0.82rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+/* Users section */
+.admin-section {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.admin-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.admin-section-header h2 {
+  font-size: 1rem;
+  color: #1a202c;
+}
+.admin-count {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  font-weight: 400;
+}
+.admin-controls {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.admin-search {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  width: 220px;
+}
+.admin-search:focus { outline: none; border-color: #4f46e5; }
+
+/* Table */
+.admin-table-wrap {
+  overflow-x: auto;
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.admin-table th {
+  text-align: left;
+  padding: 0.65rem 1rem;
+  background: #f7fafc;
+  color: #4a5568;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+.admin-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  color: #2d3748;
+  vertical-align: middle;
+}
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tbody tr:hover { background: #f7fafc; }
+.admin-row--banned td { opacity: 0.55; }
+
+.admin-cell-email {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.admin-empty-row {
+  text-align: center;
+  color: #a0aec0;
+  padding: 2rem !important;
+}
+
+/* Badges */
+.admin-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.admin-badge--purple { background: #e9d8fd; color: #6b46c1; }
+.admin-badge--red    { background: #fed7d7; color: #c53030; }
+.admin-badge--green  { background: #c6f6d5; color: #276749; }
+.admin-badge--grey   { background: #e2e8f0; color: #4a5568; }
+
+/* Action buttons in table */
+.admin-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+/* Dashboard widget list in modal */
+.admin-widget-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.admin-widget-item {
+  padding: 0.5rem 0.75rem;
+  background: #f7fafc;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: #2d3748;
+  border-left: 3px solid #4f46e5;
+}
+
 /* Ask Claude Widget */
 .claude-widget {
   display: flex;

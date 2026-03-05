@@ -6,7 +6,7 @@ import { supabase } from '../supabaseClient.js'
 import WidgetPicker from '../components/WidgetPicker.jsx'
 import WidgetGrid from '../components/WidgetGrid.jsx'
 
-export default function Dashboard({ session }) {
+export default function Dashboard({ session, role }) {
   const [widgets, setWidgets] = useState([])        // list of widget objects
   const [showPicker, setShowPicker] = useState(false) // controls the add-widget modal
   const [saveStatus, setSaveStatus] = useState('')   // "Saved ✓" feedback message
@@ -116,6 +116,11 @@ export default function Dashboard({ session }) {
         <span className="brand">Dashboard Creator</span>
         <div className="header-right">
           <span className="user-email">{session.user.email}</span>
+          {role === 'admin' && (
+            <button className="btn btn-secondary btn-sm" onClick={() => navigate('/admin')}>
+              Admin
+            </button>
+          )}
           <button className="btn btn-secondary btn-sm" onClick={handleLogout}>Log Out</button>
         </div>
       </header>
