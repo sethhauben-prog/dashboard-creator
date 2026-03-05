@@ -107,6 +107,47 @@ body {
   text-decoration: none;
 }
 .auth-card .link:hover { text-decoration: underline; }
+
+/* Google SSO button */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  background: #fff;
+  color: #3c4043;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  margin-bottom: 0.25rem;
+}
+.btn-google:hover {
+  background: #f8f9fa;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+
+/* "or" divider between Google and email/password */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  color: #a0aec0;
+  font-size: 0.82rem;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
 .error-msg {
   background: #fff5f5;
   border: 1px solid #fed7d7;
