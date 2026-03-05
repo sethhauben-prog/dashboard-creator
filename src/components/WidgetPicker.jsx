@@ -4,6 +4,7 @@ import React from 'react'
 
 // List of all available widgets with their metadata.
 const WIDGET_CATALOG = [
+  { type: 'claude',      icon: '🤖', name: 'Ask Claude',   desc: 'Chat with Claude AI' },
   { type: 'clock',       icon: '🕐', name: 'Clock',        desc: 'Current time & date' },
   { type: 'todo',        icon: '✅', name: 'To-Do List',   desc: 'Track daily tasks' },
   { type: 'quote',       icon: '💬', name: 'Daily Quote',  desc: 'Inspirational quote' },

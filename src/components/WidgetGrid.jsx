@@ -2,6 +2,7 @@
 // It maps each widget's type to the right component.
 import React from 'react'
 import ClockWidget from './widgets/ClockWidget.jsx'
+import ClaudeWidget from './widgets/ClaudeWidget.jsx'
 import TodoWidget from './widgets/TodoWidget.jsx'
 import QuoteWidget from './widgets/QuoteWidget.jsx'
 import QuickLinksWidget from './widgets/QuickLinksWidget.jsx'
@@ -16,6 +17,7 @@ import CountdownWidget from './widgets/CountdownWidget.jsx'
 
 // Map widget type strings to their components.
 const WIDGET_COMPONENTS = {
+  claude:     ClaudeWidget,
   clock:      ClockWidget,
   todo:       TodoWidget,
   quote:      QuoteWidget,
@@ -31,6 +33,7 @@ const WIDGET_COMPONENTS = {
 }
 
 const WIDGET_META = {
+  claude:     { icon: '🤖', name: 'Ask Claude' },
   clock:      { icon: '🕐', name: 'Clock' },
   todo:       { icon: '✅', name: 'To-Do List' },
   quote:      { icon: '💬', name: 'Daily Quote' },
