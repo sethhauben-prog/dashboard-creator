@@ -3,6 +3,10 @@
 import React from 'react'
 import ClockWidget from './widgets/ClockWidget.jsx'
 import ClaudeWidget from './widgets/ClaudeWidget.jsx'
+import AIDailyBriefWidget from './widgets/AIDailyBriefWidget.jsx'
+import StockTickerWidget from './widgets/StockTickerWidget.jsx'
+import KanbanWidget from './widgets/KanbanWidget.jsx'
+import WorldClocksWidget from './widgets/WorldClocksWidget.jsx'
 import TodoWidget from './widgets/TodoWidget.jsx'
 import QuoteWidget from './widgets/QuoteWidget.jsx'
 import QuickLinksWidget from './widgets/QuickLinksWidget.jsx'
@@ -17,8 +21,12 @@ import CountdownWidget from './widgets/CountdownWidget.jsx'
 
 // Map widget type strings to their components.
 const WIDGET_COMPONENTS = {
-  claude:     ClaudeWidget,
-  clock:      ClockWidget,
+  claude:      ClaudeWidget,
+  'ai-brief':  AIDailyBriefWidget,
+  stocks:      StockTickerWidget,
+  kanban:      KanbanWidget,
+  worldclocks: WorldClocksWidget,
+  clock:       ClockWidget,
   todo:       TodoWidget,
   quote:      QuoteWidget,
   quicklinks: QuickLinksWidget,
@@ -33,8 +41,12 @@ const WIDGET_COMPONENTS = {
 }
 
 const WIDGET_META = {
-  claude:     { icon: '🤖', name: 'Ask Claude' },
-  clock:      { icon: '🕐', name: 'Clock' },
+  claude:      { icon: '🤖', name: 'Ask Claude' },
+  'ai-brief':  { icon: '✨', name: 'AI Daily Brief' },
+  stocks:      { icon: '📈', name: 'Stock Ticker' },
+  kanban:      { icon: '🗂', name: 'Kanban Board' },
+  worldclocks: { icon: '🌍', name: 'World Clocks' },
+  clock:       { icon: '🕐', name: 'Clock' },
   todo:       { icon: '✅', name: 'To-Do List' },
   quote:      { icon: '💬', name: 'Daily Quote' },
   quicklinks: { icon: '🔗', name: 'Quick Links' },

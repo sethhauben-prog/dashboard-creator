@@ -6,13 +6,24 @@ import { supabase } from '../supabaseClient.js'
 import WidgetPicker from '../components/WidgetPicker.jsx'
 import WidgetGrid from '../components/WidgetGrid.jsx'
 
-export default function Dashboard({ session, role }) {
+export default function Dashboard({ session, role, plan }) {
   const [widgets, setWidgets] = useState([])        // list of widget objects
   const [showPicker, setShowPicker] = useState(false) // controls the add-widget modal
   const [saveStatus, setSaveStatus] = useState('')   // "Saved ✓" feedback message
   const [loading, setLoading] = useState(true)
+  const [paymentSuccess, setPaymentSuccess] = useState(false)
   const debounceRef = useRef(null)                   // holds our save timer
   const navigate = useNavigate()
+
+  // Detect successful payment redirect from Stripe and show a banner.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('payment') === 'success') {
+      setPaymentSuccess(true)
+      // Reload after 2.5s to refresh the plan state from Supabase.
+      setTimeout(() => window.location.replace('/dashboard'), 2500)
+    }
+  }, [])
 
   // --- Load saved widgets from Supabase when the dashboard first opens ---
   useEffect(() => {
@@ -126,6 +137,12 @@ export default function Dashboard({ session, role }) {
       </header>
 
       <div className="dashboard-content">
+        {/* Payment success banner */}
+        {paymentSuccess && (
+          <div className="payment-success-banner">
+            🎉 Payment successful! Your premium widgets are now unlocked.
+          </div>
+        )}
         {/* Toolbar: title + action buttons */}
         <div className="dashboard-toolbar">
           <h2>Set Up {saveStatus && <span className="save-status">{saveStatus}</span>}</h2>
@@ -164,6 +181,8 @@ export default function Dashboard({ session, role }) {
         <WidgetPicker
           onAdd={addWidget}
           onClose={() => setShowPicker(false)}
+          plan={plan}
+          session={session}
         />
       )}
     </div>

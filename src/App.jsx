@@ -29,8 +29,9 @@ function AdminRoute({ session, role, children }) {
 export default function App() {
   // session holds the current user's login info, or null if not logged in.
   const [session, setSession] = useState(undefined) // undefined = loading
-  // role is fetched from the profiles table once a session exists.
+  // role and plan are fetched from the profiles table once a session exists.
   const [role, setRole] = useState(null)
+  const [plan, setPlan] = useState('free')
 
   useEffect(() => {
     // Get the existing session when the app first loads.
@@ -47,15 +48,18 @@ export default function App() {
     return () => subscription.unsubscribe()
   }, [])
 
-  // Fetch the user's role from the profiles table whenever the session changes.
+  // Fetch the user's role and plan from profiles whenever the session changes.
   useEffect(() => {
-    if (!session) { setRole(null); return }
+    if (!session) { setRole(null); setPlan('free'); return }
     supabase
       .from('profiles')
-      .select('role')
+      .select('role, plan')
       .eq('id', session.user.id)
       .single()
-      .then(({ data }) => setRole(data?.role ?? 'user'))
+      .then(({ data }) => {
+        setRole(data?.role ?? 'user')
+        setPlan(data?.plan ?? 'free')
+      })
   }, [session])
 
   // Show nothing while we're figuring out if the user is logged in.
@@ -74,7 +78,7 @@ export default function App() {
           path="/dashboard"
           element={
             <ProtectedRoute session={session}>
-              <Dashboard session={session} role={role} />
+              <Dashboard session={session} role={role} plan={plan} />
             </ProtectedRoute>
           }
         />
