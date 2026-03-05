@@ -7,6 +7,7 @@ import Landing from './pages/Landing.jsx'
 import SignUp from './pages/SignUp.jsx'
 import Login from './pages/Login.jsx'
 import Dashboard from './pages/Dashboard.jsx'
+import DashboardView from './pages/DashboardView.jsx'
 
 // ProtectedRoute wraps any page that requires the user to be logged in.
 // If there's no session, it sends them back to the landing page.
@@ -45,12 +46,20 @@ export default function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
 
-        {/* Protected page — only logged-in users can access the dashboard */}
+        {/* Protected pages — only logged-in users can access these */}
         <Route
           path="/dashboard"
           element={
             <ProtectedRoute session={session}>
               <Dashboard session={session} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/view"
+          element={
+            <ProtectedRoute session={session}>
+              <DashboardView session={session} />
             </ProtectedRoute>
           }
         />

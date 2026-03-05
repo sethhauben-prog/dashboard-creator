@@ -45,7 +45,7 @@ const WIDGET_META = {
   countdown:  { icon: '⏳', name: 'Countdown' },
 }
 
-export default function WidgetGrid({ widgets, onRemove, onUpdate }) {
+export default function WidgetGrid({ widgets, onRemove, onUpdate, viewOnly = false }) {
   return (
     <div className="widget-grid">
       {widgets.map(widget => {
@@ -56,18 +56,20 @@ export default function WidgetGrid({ widgets, onRemove, onUpdate }) {
 
         return (
           <div key={widget.id} className="widget-card">
-            {/* Widget header with title and remove button */}
+            {/* Widget header: always show title; only show remove button in edit mode */}
             <div className="widget-card-header">
               <span className="widget-title">
                 {meta.icon} {meta.name}
               </span>
-              <button
-                className="btn btn-danger btn-sm"
-                onClick={() => onRemove(widget.id)}
-                title="Remove widget"
-              >
-                ✕
-              </button>
+              {!viewOnly && (
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => onRemove(widget.id)}
+                  title="Remove widget"
+                >
+                  ✕
+                </button>
+              )}
             </div>
             {/* Widget body — passes config down and lets widget update it */}
             <div className="widget-card-body">

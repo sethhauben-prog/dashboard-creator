@@ -222,6 +222,11 @@ body {
   font-size: 1.1rem;
   color: #4a5568;
 }
+.toolbar-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
 .save-status {
   font-size: 0.82rem;
   color: #68d391;
@@ -618,3 +623,112 @@ body {
   font-size: 0.88rem;
 }
 .countdown-form input:focus { outline: none; border-color: #4f46e5; }
+
+/* ---- Full-screen Dashboard View ---- */
+.dashboard-view-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, #0f0c29 0%, #302b63 55%, #1a1a3e 100%);
+}
+
+/* Loading state for view page */
+.view-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #0f0c29 0%, #302b63 55%, #1a1a3e 100%);
+  color: rgba(255,255,255,0.6);
+  font-size: 1rem;
+}
+
+/* Header bar */
+.view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1.75rem;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.view-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.view-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.view-user-email {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+}
+
+/* "Edit Dashboard" button — ghost style to suit the dark header */
+.btn-edit-dashboard {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn-edit-dashboard:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.35);
+  opacity: 1;
+  transform: none;
+}
+
+/* Widget content area */
+.view-content {
+  flex: 1;
+  padding: 2rem 1.75rem;
+  overflow-y: auto;
+}
+
+/* Widget cards sit on the dark background — keep them crisp white */
+.view-content .widget-card {
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+.view-content .widget-card-header {
+  background: #f7fafc;
+}
+
+/* Empty state for view page */
+.view-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 1rem;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+}
+
+.view-empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.view-empty p {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}

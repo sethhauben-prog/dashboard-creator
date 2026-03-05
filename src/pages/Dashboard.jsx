@@ -1,6 +1,7 @@
 // Dashboard.jsx — the main page where users build and view their widget layout.
 // We load the user's saved widgets from Supabase on mount, and auto-save on every change.
 import React, { useEffect, useState, useCallback, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient.js'
 import WidgetPicker from '../components/WidgetPicker.jsx'
 import WidgetGrid from '../components/WidgetGrid.jsx'
@@ -11,6 +12,7 @@ export default function Dashboard({ session }) {
   const [saveStatus, setSaveStatus] = useState('')   // "Saved ✓" feedback message
   const [loading, setLoading] = useState(true)
   const debounceRef = useRef(null)                   // holds our save timer
+  const navigate = useNavigate()
 
   // --- Load saved widgets from Supabase when the dashboard first opens ---
   useEffect(() => {
@@ -119,12 +121,19 @@ export default function Dashboard({ session }) {
       </header>
 
       <div className="dashboard-content">
-        {/* Toolbar: title + add button */}
+        {/* Toolbar: title + action buttons */}
         <div className="dashboard-toolbar">
-          <h2>My Dashboard {saveStatus && <span className="save-status">{saveStatus}</span>}</h2>
-          <button className="btn btn-primary" onClick={() => setShowPicker(true)}>
-            + Add Widget
-          </button>
+          <h2>Set Up {saveStatus && <span className="save-status">{saveStatus}</span>}</h2>
+          <div className="toolbar-actions">
+            <button className="btn btn-secondary" onClick={() => setShowPicker(true)}>
+              + Add Widget
+            </button>
+            {widgets.length > 0 && (
+              <button className="btn btn-primary" onClick={() => navigate('/view')}>
+                Launch Dashboard
+              </button>
+            )}
+          </div>
         </div>
 
         {/* If no widgets yet, show a friendly empty state */}
