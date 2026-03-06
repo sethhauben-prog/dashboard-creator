@@ -41,7 +41,10 @@ export default function WidgetPicker({ onAdd, onClose, plan, session }) {
           Authorization: `Bearer ${session.access_token}`,
         },
       })
-      const data = await res.json()
+      // Guard against HTML error pages (e.g. Vercel 500) that aren't valid JSON.
+      const text = await res.text()
+      let data
+      try { data = JSON.parse(text) } catch { throw new Error(`Server error (${res.status}) — check Vercel env vars`) }
       if (!res.ok) throw new Error(data.error || `Error ${res.status}`)
       window.location.href = data.url
     } catch (err) {
