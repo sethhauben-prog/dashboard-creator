@@ -916,10 +916,15 @@ body {
   border-color: #f6e05e !important;
   background: #fffff0 !important;
   cursor: default;
+  display: flex;
+  flex-direction: column;
 }
 .widget-option--locked:hover {
   border-color: #ecc94b !important;
   background: #fefce8 !important;
+}
+.widget-option--locked .wo-desc {
+  flex: 1;
 }
 .locked-overlay {
   position: absolute;
@@ -932,16 +937,21 @@ body {
 .widget-option--premium {
   border-color: #9ae6b4 !important;
   background: #f0fff4 !important;
+  display: flex;
+  flex-direction: column;
 }
 .widget-option--premium:hover {
   border-color: #68d391 !important;
   background: #e6ffed !important;
 }
+.widget-option--premium .wo-desc {
+  flex: 1;
+}
 .premium-unlocked-badge {
   font-size: 0.7rem;
   color: #276749;
   font-weight: 700;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
 }
 
 /* Unlock button inside locked card */
