@@ -28,9 +28,11 @@ const PREMIUM_WIDGETS = [
 export default function WidgetPicker({ onAdd, onClose, plan, session }) {
   const isPaid = plan === 'paid'
   const [unlocking, setUnlocking] = useState(false)
+  const [unlockError, setUnlockError] = useState(null)
 
   async function handleUnlock() {
     setUnlocking(true)
+    setUnlockError(null)
     try {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
@@ -40,11 +42,11 @@ export default function WidgetPicker({ onAdd, onClose, plan, session }) {
         },
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error)
-      // Redirect to Stripe Checkout.
+      if (!res.ok) throw new Error(data.error || `Error ${res.status}`)
       window.location.href = data.url
     } catch (err) {
       console.error('Checkout error:', err)
+      setUnlockError(err.message)
       setUnlocking(false)
     }
   }
@@ -77,6 +79,10 @@ export default function WidgetPicker({ onAdd, onClose, plan, session }) {
           </div>
 
           {/* Premium widgets section */}
+          {unlockError && (
+            <div className="unlock-error">⚠️ {unlockError}</div>
+          )}
+
           <div className="premium-section-header">
             <span className="premium-label">⭐ Premium Widgets</span>
             {!isPaid && (

@@ -878,6 +878,16 @@ body {
 }
 
 /* ---- Premium widget picker styles ---- */
+.unlock-error {
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  color: #c53030;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
 .premium-section-header {
   display: flex;
   align-items: center;
